@@ -498,6 +498,36 @@ export interface ApiCostumerCostumer extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiFacebookPostFacebookPost
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'facebook_posts';
+  info: {
+    displayName: 'FacebookPost';
+    pluralName: 'facebook-posts';
+    singularName: 'facebook-post';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::facebook-post.facebook-post'
+    > &
+      Schema.Attribute.Private;
+    PostName: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    URL: Schema.Attribute.String;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1010,6 +1040,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::costumer.costumer': ApiCostumerCostumer;
+      'api::facebook-post.facebook-post': ApiFacebookPostFacebookPost;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
