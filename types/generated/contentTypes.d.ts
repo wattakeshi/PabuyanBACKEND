@@ -496,6 +496,7 @@ export interface ApiCostumerCostumer extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    wishlist: Schema.Attribute.Relation<'oneToOne', 'api::wishlist.wishlist'>;
   };
 }
 
@@ -558,7 +559,7 @@ export interface ApiRequestedproductRequestedproduct
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    url: Schema.Attribute.String;
+    wishlist: Schema.Attribute.Relation<'manyToOne', 'api::wishlist.wishlist'>;
   };
 }
 
@@ -573,6 +574,7 @@ export interface ApiWishlistWishlist extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    costumer: Schema.Attribute.Relation<'oneToOne', 'api::costumer.costumer'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

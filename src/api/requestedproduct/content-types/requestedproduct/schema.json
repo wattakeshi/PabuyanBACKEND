@@ -20,15 +20,18 @@
     "qty": {
       "type": "integer"
     },
-    "url": {
-      "type": "string"
-    },
     "reference": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
         "images"
       ]
+    },
+    "wishlist": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::wishlist.wishlist",
+      "inversedBy": "requestedproducts"
     }
   }
 }

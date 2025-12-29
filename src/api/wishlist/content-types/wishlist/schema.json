@@ -19,10 +19,17 @@
         "Shipping"
       ]
     },
+    "costumer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::costumer.costumer",
+      "mappedBy": "wishlist"
+    },
     "requestedproducts": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::requestedproduct.requestedproduct"
+      "target": "api::requestedproduct.requestedproduct",
+      "mappedBy": "wishlist"
     }
   }
 }
