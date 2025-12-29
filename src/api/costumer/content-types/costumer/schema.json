@@ -22,6 +22,11 @@
     },
     "contact": {
       "type": "string"
+    },
+    "Costumer": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::wishlist.wishlist"
     }
   }
 }

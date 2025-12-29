@@ -480,6 +480,7 @@ export interface ApiCostumerCostumer extends Struct.CollectionTypeSchema {
   attributes: {
     address: Schema.Attribute.String;
     contact: Schema.Attribute.String;
+    Costumer: Schema.Attribute.Relation<'oneToMany', 'api::wishlist.wishlist'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -558,6 +559,40 @@ export interface ApiRequestedproductRequestedproduct
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     url: Schema.Attribute.String;
+  };
+}
+
+export interface ApiWishlistWishlist extends Struct.CollectionTypeSchema {
+  collectionName: 'wishlists';
+  info: {
+    displayName: 'Wishlist';
+    pluralName: 'wishlists';
+    singularName: 'wishlist';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::wishlist.wishlist'
+    > &
+      Schema.Attribute.Private;
+    orderstatus: Schema.Attribute.Enumeration<
+      ['Pending', 'Dealing', 'Shipping']
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    requestedproducts: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::requestedproduct.requestedproduct'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1075,6 +1110,7 @@ declare module '@strapi/strapi' {
       'api::costumer.costumer': ApiCostumerCostumer;
       'api::facebook-post.facebook-post': ApiFacebookPostFacebookPost;
       'api::requestedproduct.requestedproduct': ApiRequestedproductRequestedproduct;
+      'api::wishlist.wishlist': ApiWishlistWishlist;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
