@@ -528,6 +528,39 @@ export interface ApiFacebookPostFacebookPost
   };
 }
 
+export interface ApiRequestedproductRequestedproduct
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'requestedproducts';
+  info: {
+    displayName: 'Requestedproduct';
+    pluralName: 'requestedproducts';
+    singularName: 'requestedproduct';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    details: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::requestedproduct.requestedproduct'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    qty: Schema.Attribute.Integer;
+    reference: Schema.Attribute.Media<'images'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    url: Schema.Attribute.String;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1041,6 +1074,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::costumer.costumer': ApiCostumerCostumer;
       'api::facebook-post.facebook-post': ApiFacebookPostFacebookPost;
+      'api::requestedproduct.requestedproduct': ApiRequestedproductRequestedproduct;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
