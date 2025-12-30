@@ -15,20 +15,22 @@ module.exports = ({ env }) => ({
   },
 
 
-  email: {
+email: {
     config: {
       provider: 'nodemailer',
       providerOptions: {
-        host: 'smtp.gmail.com',
-        port: 587,
+        host: env('EMAIL_SMTP_HOST', 'smtp.gmail.com'),
+        port: 587, // Mude para 587
         auth: {
-          user: env('GMAIL_USER'), 
-          pass: env('GMAIL_PASS'), 
+          user: env('GMAIL_USER'),
+          pass: env('GMAIL_PASS'),
         },
+        secure: false, // 'false' para porta 587, 'true' para 465
+        rejectUnauthorized: false, // Ajuda a evitar erros de certificado em servidores de hospedagem
       },
       settings: {
-        defaultFrom: 'noreply@pabuyan.com',
-        defaultReplyTo: 'contato@pabuyan.com',
+        defaultFrom: env('GMAIL_USER'),
+        defaultReplyTo: env('GMAIL_USER'),
       },
     },
   },
