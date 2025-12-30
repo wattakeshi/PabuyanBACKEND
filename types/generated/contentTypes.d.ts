@@ -553,9 +553,9 @@ export interface ApiRequestedproductRequestedproduct
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    productstatus: Schema.Attribute.Enumeration<['unseen', 'checking', 'done']>;
     publishedAt: Schema.Attribute.DateTime;
     qty: Schema.Attribute.Integer;
-    reference: Schema.Attribute.Media<'images'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

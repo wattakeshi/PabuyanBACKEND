@@ -20,18 +20,19 @@
     "qty": {
       "type": "integer"
     },
-    "reference": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "wishlist": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::wishlist.wishlist",
       "inversedBy": "requestedproducts"
+    },
+    "productstatus": {
+      "type": "enumeration",
+      "enum": [
+        "unseen",
+        "checking",
+        "done"
+      ]
     }
   }
 }
