@@ -15,18 +15,23 @@ module.exports = ({ env }) => ({
   },
 
 
-email: {
+  email: {
     config: {
       provider: 'nodemailer',
       providerOptions: {
-        host: env('EMAIL_SMTP_HOST', 'smtp.gmail.com'),
-        port: 587, // Mude para 587
+        host: 'smtp.gmail.com',
+        port: 587,
         auth: {
           user: env('GMAIL_USER'),
           pass: env('GMAIL_PASS'),
         },
-        secure: false, // 'false' para porta 587, 'true' para 465
-        rejectUnauthorized: false, // Ajuda a evitar erros de certificado em servidores de hospedagem
+        secure: false,
+        connectionTimeout: 5000, 
+        greetingTimeout: 5000,
+        socketTimeout: 5000,
+        tls: {
+          rejectUnauthorized: false,
+        },
       },
       settings: {
         defaultFrom: env('GMAIL_USER'),

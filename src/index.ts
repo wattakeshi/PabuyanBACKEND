@@ -2,18 +2,18 @@ export default {
   register({ strapi }) {},
 
   bootstrap({ strapi }) {
-    strapi.db.lifecycles.subscribe({
-      models: ['api::wishlist.wishlist'], 
+  strapi.db.lifecycles.subscribe({
+    models: ['api::wishlist.wishlist'],
+    async afterCreate(event) {
+      const { result } = event;
+      if (result.publishedAt === null) return;
 
-      async afterCreate(event) {
-        const { result } = event;
-        console.log('WEBHOOK SENT!');
-        if (result.publishedAt === null) {
-        return;
-    }
-        try {
-           strapi.plugin('email').service('email').send({
-            to: 'pabuyanservice@gmail.com',
+      console.log('Tentando enviar e-mail em background...');
+
+      // Executamos a função sem dar await no 'send', 
+      // mas tratamos o erro lá dentro.
+      strapi.plugin('email').service('email').send({
+                to: 'pabuyanservice@gmail.com',
             from: 'pabuyanservice@gmail.com',
             subject: `🚀 New Order Received! ID: ${result.documentId.substring(0, 8)}`,
             text: `You have a new wishlist! ID: ${result.documentId}`, 
@@ -33,14 +33,13 @@ export default {
             </a>
             <br />
             <br />
-          </div>
-        `,
-          });
-          console.log('E-mail sent via Bootstrap!');
-        } catch (err) {
-          console.error('Fail to send email:', err);
-        }
-      },
-    });
-  },
+          </div>`
+      }).then(() => {
+        console.log('✅ E-mail enviado com sucesso!');
+      }).catch((err) => {
+        console.error('❌ O e-mail falhou, mas o servidor continua rodando:', err.message);
+      });
+    },
+  });
+},
 };
