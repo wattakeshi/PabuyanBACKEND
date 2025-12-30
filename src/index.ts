@@ -12,7 +12,7 @@ export default {
         return;
     }
         try {
-          await strapi.plugin('email').service('email').send({
+           strapi.plugin('email').service('email').send({
             to: 'pabuyanservice@gmail.com',
             from: 'pabuyanservice@gmail.com',
             subject: `🚀 New Order Received! ID: ${result.documentId.substring(0, 8)}`,
