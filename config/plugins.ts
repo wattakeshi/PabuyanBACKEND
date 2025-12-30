@@ -14,20 +14,14 @@ module.exports = ({ env }) => ({
     },
   },
 
-
   email: {
     config: {
-      provider: 'nodemailer',
+      provider: 'brevo',
       providerOptions: {
-        host: 'smtp-relay.brevo.com', // Host do Brevo
-        port: 587,
-        auth: {
-          user: env('GMAIL_USER'), // Seu login do Brevo
-          pass: env('GMAIL_PASS'), // Sua chave SMTP do Brevo
-        },
+        apiKey: env('BREVO_API_KEY'),
       },
       settings: {
-        defaultFrom: 'pabuyanservice@gmail.com', // Seu e-mail verificado no Brevo
+        defaultFrom: 'pabuyanservice@gmail.com',
         defaultReplyTo: 'pabuyanservice@gmail.com',
       },
     },
