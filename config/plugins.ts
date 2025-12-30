@@ -19,23 +19,16 @@ module.exports = ({ env }) => ({
     config: {
       provider: 'nodemailer',
       providerOptions: {
-        host: 'smtp.gmail.com',
+        host: 'smtp-relay.brevo.com', // Host do Brevo
         port: 587,
         auth: {
-          user: env('GMAIL_USER'),
-          pass: env('GMAIL_PASS'),
-        },
-        secure: false,
-        connectionTimeout: 5000, 
-        greetingTimeout: 5000,
-        socketTimeout: 5000,
-        tls: {
-          rejectUnauthorized: false,
+          user: env('GMAIL_USER'), // Seu login do Brevo
+          pass: env('GMAIL_PASS'), // Sua chave SMTP do Brevo
         },
       },
       settings: {
-        defaultFrom: env('GMAIL_USER'),
-        defaultReplyTo: env('GMAIL_USER'),
+        defaultFrom: 'pabuyanservice@gmail.com', // Seu e-mail verificado no Brevo
+        defaultReplyTo: 'pabuyanservice@gmail.com',
       },
     },
   },
