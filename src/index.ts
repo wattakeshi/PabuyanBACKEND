@@ -13,7 +13,7 @@ export default {
       // Executamos a função sem dar await no 'send', 
       // mas tratamos o erro lá dentro.
       strapi.plugin('email').service('email').send({
-                to: 'pabuyanservice@gmail.com',
+                to: 'JapanPasaBUY@gmail.com',
             from: 'pabuyanservice@gmail.com',
             subject: `🚀 New Order Received! ID: ${result.documentId.substring(0, 8)}`,
             text: `You have a new wishlist! ID: ${result.documentId}`, 
